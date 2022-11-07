@@ -32,6 +32,12 @@
     flex-direction: column;
     gap: 2rem;
     position: relative;
+    transition: 0.8s all;
+}
+
+.productsList__item--gray:hover{
+    cursor: pointer;
+    filter: grayscale(1);
 }
 
 .productsList__button{

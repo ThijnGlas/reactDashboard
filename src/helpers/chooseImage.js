@@ -3,20 +3,23 @@ import watchImage from "../img/watch.jpg";
 import skyImage from "../img/sky.jpg"
 import mountainImage from "../img/mountain.jpg"
 
-function chooseImage(inputFromPopup){
+function chooseImage(inputFromPopup) {
     let toBeAddedImage;
-    switch(inputFromPopup){
-        case("watch"):
+    switch (inputFromPopup) {
+        case ("watch"):
             toBeAddedImage = watchImage;
             break;
-            case("flowers"):
+        case ("flowers"):
             toBeAddedImage = flowersImage;
             break;
-            case("sky"):
+        case ("sky"):
             toBeAddedImage = skyImage;
             break;
-            case("mountain"):
+        case ("mountain"):
             toBeAddedImage = mountainImage;
+            break;
+        default:
+            toBeAddedImage = mountainImage
             break;
     }
     return toBeAddedImage;

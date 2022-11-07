@@ -1,8 +1,13 @@
 import './RightPane.css';
+import ProductCard from '../ProductCard/ProductCard';
 
-const RightPane = ({ headerText, buttonSymbol, buttonText, productCards, onButtonClicked }) => {
+const RightPane = ({ headerText, buttonSymbol, buttonText, productCards, onButtonClicked, }) => {
     let addProduct = () => {
         onButtonClicked();
+    }
+
+    let onCardClicked = (idFromCard) => {
+        console.log(idFromCard)
     }
     
     let productCardsToBeRendered = productCards.map(product => {
@@ -12,15 +17,10 @@ const RightPane = ({ headerText, buttonSymbol, buttonText, productCards, onButto
                     <button onClick={addProduct} className="productsList__button">{buttonSymbol || "*"}</button>
                     <p className="productsList__text">{buttonText || "lorem ipsum"}</p>
                 </li>
-            )
+            );
         }
         return (
-            <li key={product.id} className="productsList__item">
-                <img className="productsList__img" src={product.img} alt={product.name} />
-                <div className="productsList__fade">
-                <p className="productsList__imageText">{product.name}</p>
-                </div>
-            </li>
+            <ProductCard onCardClicked={onCardClicked} key={product.id} id={product.id} name={product.name} productImg={product.img} />
         );
 
     });
