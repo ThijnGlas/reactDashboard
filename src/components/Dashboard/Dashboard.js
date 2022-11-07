@@ -1,13 +1,15 @@
 import React from 'react';
+// own components
 import LeftPane from '../LeftPane/LeftPane';
 import RightPane from '../RightPane/RightPane';
 import Popup from "../Popup/Popup"
-import flowersImage from "../../img/flowers.jpg";
-import watchImage from "../../img/watch.jpg";
-import skyImage from "../../img/sky.jpg"
-import mountainImage from "../../img/mountain.jpg"
+// helpers
+import chooseImage from '../../helpers/chooseImage';
+import navigationItemsObject from '../../data/navigationItems';
+// import data from data source
+import products from '../../data/products';
+// styling / css
 import './Dashboard.css';
-import { render } from '@testing-library/react';
 
 class Dashboard extends React.Component {
 
@@ -17,48 +19,20 @@ class Dashboard extends React.Component {
     }
 
     componentDidMount() {
-        let productCards = [
-            {
-                name: "placeholder"
-            },
-            {
-                name: "flowers",
-                img: flowersImage
-            },
-            {
-                name: "watch",
-                img: watchImage
-            },
-
-
-        ];
-        this.setState({ productCards: productCards })
+        this.setState({ productCards: products.products })
     }
 
     onButtonClicked = () => {
-        this.setState({open: !this.state.open})
+        this.setState({ open: !this.state.open })
     }
 
     addButtonClicked = (inputFromPopup) => {
-        let toBeAddedImage;
-        switch(inputFromPopup){
-            case("watch"):
-                toBeAddedImage = watchImage;
-                break;
-                case("flowers"):
-                toBeAddedImage = flowersImage;
-                break;
-                case("sky"):
-                toBeAddedImage = skyImage;
-                break;
-                case("mountain"):
-                toBeAddedImage = mountainImage;
-                break;
-        }
+        let imagefromhelper = chooseImage(inputFromPopup);
         let toBeAdded = [
             {
+                id: this.state.productCards.length + 1,
                 name: inputFromPopup,
-                img: toBeAddedImage,
+                img: imagefromhelper,
             }
         ]
 
@@ -70,34 +44,10 @@ class Dashboard extends React.Component {
     }
 
     render() {
-        let navigationListItems =
-            [
-                {
-                    name: "Home",
-                    message: 0,
-                },
-                {
-                    name: "facturen",
-                    message: 2,
-                },
-                {
-                    name: "Bestellingen",
-                    message: 1,
-                },
-                {
-                    name: "Retour",
-                    message: 0,
-                },
-                {
-                    name: "contact",
-                    message: 2,
-                },
-            ];
-
         if (this.state.open === true) {
             return (
                 <article className='dashboard'>
-                    <LeftPane navigationListItems={navigationListItems} buttonText="Go Premium" />
+                    <LeftPane navigationListItems={navigationItemsObject.navigationItems} buttonText="Go Premium" />
                     <RightPane onButtonClicked={this.onButtonClicked} productCards={this.state.productCards} headerText="mijn producten" buttonSymbol="+" buttonText="voeg een product toe" />
                 </article>
             )
