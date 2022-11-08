@@ -15,7 +15,7 @@ class Dashboard extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { productCards: [], open: true };
+        this.state = { productCards: [], open: true, CardClicked: {} };
     }
 
     componentDidMount() {
@@ -43,8 +43,14 @@ class Dashboard extends React.Component {
         })
     }
 
-    onCardClicked =  () =>{
-        this.setState({ open: !this.state.open })
+    onCardClicked = (idFromCard) => {
+        
+        this.setState(
+            {
+                open: !this.state.open, 
+                CardClicked: this.state.productCards[idFromCard -1],
+            }
+        )
     }
 
     render() {
@@ -52,12 +58,12 @@ class Dashboard extends React.Component {
             return (
                 <article className='dashboard'>
                     <LeftPane navigationListItems={navigationItemsObject.navigationItems} buttonText="Go Premium" />
-                    <RightPane onCardClicked={this.onCardClicked} onButtonClicked={this.onButtonClicked} productCards={this.state.productCards} headerText="mijn producten" buttonSymbol="+" buttonText="voeg een product toe" />
+                    <RightPane onProductCardClicked={this.onCardClicked} onButtonClicked={this.onButtonClicked} productCards={this.state.productCards} headerText="mijn producten" buttonSymbol="+" buttonText="voeg een product toe" />
                 </article>
             )
         }
         return (
-            <Popup addButtonClicked={this.addButtonClicked} />
+            <Popup cardClicked={this.state.CardClicked} addButtonClicked={this.addButtonClicked} />
         )
 
 
