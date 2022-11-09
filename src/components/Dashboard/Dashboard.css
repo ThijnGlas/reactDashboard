@@ -1,4 +1,4 @@
-.dashboard{
+.dashboard {
     width: 100%;
     min-height: 90vh;
     background: #2C3639;
@@ -6,4 +6,12 @@
     grid-template-columns: 30% 70%;
     border-radius: 1rem;
     grid-template-rows: auto;
+}
+
+@media screen and (max-width: 62.5rem) {
+    .dashboard {
+        display: flex;
+        flex-direction: column;
+    }
+    
 }

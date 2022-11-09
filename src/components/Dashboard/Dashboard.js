@@ -48,24 +48,35 @@ class Dashboard extends React.Component {
         })
     }
 
+    editButtonClicked = (inputFromPopup) => {
+        let productCards = this.state.productCards;
+        let newState = productCards.map(product => {
+            if(this.state.CardClicked.id === product.id){
+                product.name = inputFromPopup;
+                return product;
+            }
+            else{
+                return product;
+            }
+        });
+        this.setState({ productCard: newState, open: true});
+    }
+
     onCardClicked = (idFromCard) => {
-        if(this.state.productCards[idFromCard - 1].name === "placeholder"){
+        if (this.state.productCards[idFromCard - 1].name === "placeholder") {
             this.setState({
                 editMode: false,
-            });
-        }
-        else{
-            this.setState({
-                    editMode: true,
-                });
-        }
-        this.setState(
-            {
                 open: !this.state.open,
                 CardClicked: this.state.productCards[idFromCard - 1],
-            }
-        )  
-        
+            });
+            return;
+        }
+        this.setState({
+            editMode: true,
+            open: !this.state.open,
+            CardClicked:this.state.productCards[idFromCard - 1]
+        })
+
     }
 
     render() {
@@ -78,7 +89,7 @@ class Dashboard extends React.Component {
             )
         }
         return (
-            <Popup editMode={this.state.editMode} cardClicked={this.state.CardClicked} addButtonClicked={this.addButtonClicked} />
+            <Popup editButtonClicked={this.editButtonClicked} editMode={this.state.editMode} cardClicked={this.state.CardClicked} addButtonClicked={this.addButtonClicked} />
         )
 
 
