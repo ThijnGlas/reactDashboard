@@ -4,6 +4,7 @@
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 0rem 0 2rem 0 hsla(193, 14%, 8%, 0.3);
+    gap: 2rem;
 }
 
 .dashboard__ul{
@@ -56,4 +57,12 @@
 .dashboard__button:hover{
     cursor: pointer;
     filter: hue-rotate(-40deg);
+}
+
+@media screen and (max-width: 62.5rem) {
+    .dashboard__wrapper{
+        padding: 5rem;
+        /* justify-content: center;
+        align-items: center; */
+    }
 }
